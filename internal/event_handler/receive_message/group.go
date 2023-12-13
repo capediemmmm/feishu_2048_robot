@@ -1,9 +1,10 @@
 package receiveMessage
 
 import (
+	"strings"
+
 	larkim "github.com/larksuite/oapi-sdk-go/v3/service/im/v1"
 	"github.com/sirupsen/logrus"
-	"strings"
 )
 
 func group(event *larkim.P2MessageReceiveV1) {
@@ -26,7 +27,7 @@ func groupTextMessage(event *larkim.P2MessageReceiveV1) {
 	logrus.WithFields(logrus.Fields{"message content": content}).Info("Receive group TEXT message")
 
 	switch content {
-	case "":
+	case "help":
 		groupHelpMenu(event)
 	default:
 		logrus.WithFields(logrus.Fields{"message content": content}).Warn("Receive group TEXT message, but this content does not have a handler")

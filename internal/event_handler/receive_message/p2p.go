@@ -1,6 +1,7 @@
 package receiveMessage
 
 import (
+	"fmt"
 	"strings"
 
 	larkim "github.com/larksuite/oapi-sdk-go/v3/service/im/v1"
@@ -30,10 +31,57 @@ func p2pTextMessage(event *larkim.P2MessageReceiveV1) {
 	case "initial":
 		p2pNewGame(event)
 	case "上":
+		g.Move(event, content)
+		g.AddElement()
+		g.Display(event)
+		if g.IsSuccess() {
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, "You win!")
+		}
+		if g.IsOver() {
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, "You lose!")
+			sum, score := g.CountScore()
+			text := "Your score is " + fmt.Sprintf("%d", score) + " and the sum is " + fmt.Sprintf("%d", sum)
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, text)
+		}
 	case "下":
+		g.Move(event, content)
+		g.AddElement()
+		g.Display(event)
+		if g.IsSuccess() {
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, "You win!")
+		}
+		if g.IsOver() {
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, "You lose!")
+			sum, score := g.CountScore()
+			text := "Your score is " + fmt.Sprintf("%d", score) + " and the sum is " + fmt.Sprintf("%d", sum)
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, text)
+		}
 	case "左":
+		g.Move(event, content)
+		g.AddElement()
+		g.Display(event)
+		if g.IsSuccess() {
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, "You win!")
+		}
+		if g.IsOver() {
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, "You lose!")
+			sum, score := g.CountScore()
+			text := "Your score is " + fmt.Sprintf("%d", score) + " and the sum is " + fmt.Sprintf("%d", sum)
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, text)
+		}
 	case "右":
-		p2pMove(event)
+		g.Move(event, content)
+		g.AddElement()
+		g.Display(event)
+		if g.IsSuccess() {
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, "You win!")
+		}
+		if g.IsOver() {
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, "You lose!")
+			sum, score := g.CountScore()
+			text := "Your score is " + fmt.Sprintf("%d", score) + " and the sum is " + fmt.Sprintf("%d", sum)
+			SendMessage(UserOpenId, *event.Event.Sender.SenderId.OpenId, Text, text)
+		}
 	default:
 		logrus.WithFields(logrus.Fields{"message content": content}).Warn("Receive p2p TEXT message, but this content does not have a handler")
 	}
