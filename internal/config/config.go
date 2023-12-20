@@ -1,10 +1,11 @@
 package config
 
 import (
+	"xlab-feishu-robot/internal/pkg"
+
 	lark "github.com/larksuite/oapi-sdk-go/v3"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"xlab-feishu-robot/internal/pkg"
 )
 
 type LarkConfig struct {

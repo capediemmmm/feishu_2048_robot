@@ -48,7 +48,7 @@ type board struct {
 }
 
 type GBoard interface {
-	GDisplay(event *larkim.P2MessageReceiveV1)
+	GDisplay(event *larkim.P2MessageReceiveV1, head string)
 	AddElement()
 	Move(event *larkim.P2MessageReceiveV1, content string)
 	IsOver() bool
@@ -56,8 +56,11 @@ type GBoard interface {
 	IsSuccess() bool
 }
 
+var MG = map[string]GBoard{}
+
 var g Board
-var G GBoard
+
+// var G GBoard
 
 // SendMessage Send a message to a person / chat group
 func SendMessage(receiveIdType MsgReceiverType, receiveId string, msgType MsgContentType, msg string) {

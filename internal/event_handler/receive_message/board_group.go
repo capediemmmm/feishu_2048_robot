@@ -10,11 +10,11 @@ func groupHelpMenu(event *larkim.P2MessageReceiveV1) {
 	SendMessage(GroupChatId, *event.Event.Message.ChatId, Text, "this is a group test string")
 }
 
-func groupNewGame(event *larkim.P2MessageReceiveV1) {
-	G = GNew()
-	G.AddElement()
-	G.AddElement()
-	G.GDisplay(event)
+func groupNewGame(event *larkim.P2MessageReceiveV1, head string, b GBoard) {
+	b = GNew()
+	b.AddElement()
+	b.AddElement()
+	b.GDisplay(event, head)
 }
 
 func GNew() GBoard {
@@ -27,8 +27,9 @@ func GNew() GBoard {
 	}
 }
 
-func (b *board) GDisplay(event *larkim.P2MessageReceiveV1) {
+func (b *board) GDisplay(event *larkim.P2MessageReceiveV1, head string) {
 	var table string
+	table += head
 	//b.matrix = getRandom()
 	for i := 0; i < len(b.matrix); i++ {
 		for i := 0; i < 40; i++ {

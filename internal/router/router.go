@@ -7,7 +7,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	sdkginext "github.com/larksuite/oapi-sdk-gin"
-	larkcard "github.com/larksuite/oapi-sdk-go/v3/card"
 	"github.com/larksuite/oapi-sdk-go/v3/event/dispatcher"
 )
 
@@ -20,6 +19,6 @@ func Register(r *gin.Engine) {
 		OnP2MessageReceiveV1(receiveMessage.Receive)
 	// DO NOT CHANGE THIS LINE
 	r.POST("/lark/event", sdkginext.NewEventHandlerFunc(handler))
-	cardHandler := larkcard.NewCardActionHandler(config.C.LarkConfig.VerificationToken, config.C.LarkConfig.EncryptKey, receiveMessage.ReceiveCard)
-	r.POST("/lark/2048", sdkginext.NewCardActionHandlerFunc(cardHandler))
+	// cardHandler := larkcard.NewCardActionHandler(config.C.LarkConfig.VerificationToken, config.C.LarkConfig.EncryptKey, receiveMessage.ReceiveCard)
+	// r.POST("/lark/2048", sdkginext.NewCardActionHandlerFunc(cardHandler))
 }

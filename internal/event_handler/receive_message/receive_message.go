@@ -25,7 +25,7 @@ func Receive(_ context.Context, event *larkim.P2MessageReceiveV1) error {
 	return nil
 }
 
-// Receive user message sending to the robot
+// Receive user message sending to the robot, a demo
 func ReceiveCard(_ context.Context, event *larkcard.CardAction) (interface{}, error) {
 	// 创建 http body
 	body := make(map[string]interface{})
